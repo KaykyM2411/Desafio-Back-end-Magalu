@@ -4,9 +4,7 @@ import com.kayky.magalums.dto.ScheduleNotification;
 import com.kayky.magalums.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/notifications")
@@ -15,7 +13,8 @@ public class NotificationController {
     @Autowired
     private NotificationService notificationService;
 
-    public ResponseEntity<Void> schedulerNotification(@ResponseBody ScheduleNotification dto){
+    @PostMapping
+    public ResponseEntity<Void> schedulerNotification(@RequestBody ScheduleNotification dto){
         notificationService.schedulerNotification(dto);
 
         return ResponseEntity.accepted().build();

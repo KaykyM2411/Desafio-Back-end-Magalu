@@ -6,6 +6,8 @@ import com.kayky.magalums.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class NotificationService {
 
@@ -14,6 +16,10 @@ public class NotificationService {
 
     public void schedulerNotification(ScheduleNotification dto) {
         notificationRepository.save(dto.toNotification());
+    }
+
+    public Optional<Notification> getNotificationById(Long id) {
+        return notificationRepository.findById(id);
     }
 
 }

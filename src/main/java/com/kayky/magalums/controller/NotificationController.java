@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/notifications")
 public class NotificationController {
@@ -18,6 +20,16 @@ public class NotificationController {
         notificationService.schedulerNotification(dto);
 
         return ResponseEntity.accepted().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable("id") Long id){
+       var notification = notificationService.getNotificationById(id);
+
+       if(notification.isEmpty()){
+           return ResponseEntity.notFound().build();
+       }
+       return ResponseEntity.ok(notification.get());
     }
 }
 
